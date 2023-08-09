@@ -25,18 +25,23 @@ import java.util.*;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserDao userDao;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    CustomerUsersDatailsService customerUsersDatailsService;
-    @Autowired
-    JwtUtil jwtUtil;
-    @Autowired
-    JwtFilter jwtFilter;
-    @Autowired
-    EmailUtils emailUtils;
+
+    private UserDao userDao;
+    private AuthenticationManager authenticationManager;
+    private CustomerUsersDatailsService customerUsersDatailsService;
+    private JwtUtil jwtUtil;
+    private JwtFilter jwtFilter;
+    private EmailUtils emailUtils;
+
+    public UserServiceImpl(UserDao userDao, AuthenticationManager authenticationManager, CustomerUsersDatailsService customerUsersDatailsService, JwtUtil jwtUtil, JwtFilter jwtFilter, EmailUtils emailUtils) {
+        this.userDao = userDao;
+        this.authenticationManager = authenticationManager;
+        this.customerUsersDatailsService = customerUsersDatailsService;
+        this.jwtUtil = jwtUtil;
+        this.jwtFilter = jwtFilter;
+        this.emailUtils = emailUtils;
+    }
+
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         log.info("Inside signup {}", requestMap);
